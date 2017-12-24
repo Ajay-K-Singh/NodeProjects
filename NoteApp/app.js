@@ -7,13 +7,18 @@ const argv = yargs.argv;
 var command = process.argv[2];
 
 if (command === 'add') {
-    notes.addNote(argv.title, argv.body);
+    var note = notes.addNote(argv.title, argv.body);
+    if (note) {
+        console.log('Note has been added');
+    } else console.log('Note is duplicate');
 } else if (command === 'list') {
     notes.getAll();
 } else if (command === 'read') {
     notes.getNote(argv.title);
 } else if (command === 'remove') {
-    notes.removeNote(argv.title);
+    const result = notes.removeNote(argv.title);
+    const removeNoteMsg = result ? 'Note was removed' : 'Note was not found.';
+    console.log(removeNoteMsg);
 } else {
     console.log('Command not recognized');
 }
