@@ -1,0 +1,16 @@
+{
+    "name": "noteapp",
+    "version": "1.0.0",
+    "description": "Notes node application",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "yargs": "^10.0.3",
+        "loadash": "^1.0.0"
+    },
+    "devDependencies": {}
+}
