@@ -29,10 +29,12 @@ var addNote = (title, body) => {
 };
 
 var getAll = () => {
-    console.log('Getting All Nodes');
+    return fetchNotes();
 };
 var getNote = (title) => {
-    console.log('Getting Note: ', title);
+    var notes = fetchNotes();
+    var foundArrayNotes = notes.filter((note) => note.title === title);
+    return foundArrayNotes;
 };
 
 var removeNote = (title) => {
@@ -42,10 +44,17 @@ var removeNote = (title) => {
     return notes.length !== newNotesArray.length;
 };
 
+var logNote = (note) => {
+    console.log('Title: ', note.title);
+    console.log('Body: ', note.body);
+};
+
 
 module.exports = {
     addNote,
     getAll,
     getNote,
-    removeNote
+    removeNote,
+    logNote,
+    getAll
 };

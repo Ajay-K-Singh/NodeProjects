@@ -10,11 +10,20 @@ if (command === 'add') {
     var note = notes.addNote(argv.title, argv.body);
     if (note) {
         console.log('Note has been added');
+        notes.logNote(note);
     } else console.log('Note is duplicate');
 } else if (command === 'list') {
-    notes.getAll();
+    var allNotes = notes.getAll();
+    console.log(allNotes);
+    allNotes.forEach(note => {
+        notes.logNote(note);
+    });
 } else if (command === 'read') {
-    notes.getNote(argv.title);
+    const findNote = notes.getNote(argv.title);
+    if (findNote) {
+        console.log('The note found is: ', findNote);
+        notes.logNote(findNote);
+    } else console.log('Note not found');
 } else if (command === 'remove') {
     const result = notes.removeNote(argv.title);
     const removeNoteMsg = result ? 'Note was removed' : 'Note was not found.';
