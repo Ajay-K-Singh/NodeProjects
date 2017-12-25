@@ -1,9 +1,7 @@
 var request = require('request');
 
-var request = require('request');
-
 var geoCodeRequest = (address) => {
-    const encodedAddress = encodeURIComponent(argv.address);
+    const encodedAddress = encodeURIComponent(address);
     request({
         url: `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}`,
         json: true
@@ -14,11 +12,14 @@ var geoCodeRequest = (address) => {
         } else if (body.status === 'ZERO_RESULTS') {
             console.log('Unable to find the address');
         } else if (body.status === 'OK') {
-            console.log(`Address: ${body.results[0].formatted_address}`);
-            console.log(`Latitude: ${body.results[0].geometry.location.lat}`);
-            console.log(`Longitude: ${body.results[0].geometry.location.lng}`);
+            const addressObject = {
+                address: body.results[0].formatted_address,
+                lat: body.results[0].geometry.location.lat,
+                lng: body.results[0].geometry.location.lng
+            }
+            return addressObject;
         }
     });
-}
+};
 
-module.exports = geoCodeRequest;
+module.exports.geoCodeRequest = geoCodeRequest;
