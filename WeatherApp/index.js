@@ -12,8 +12,22 @@ const argv = yargs
     })
     .help().alias('help', 'h').argv;
 
-const latLngInfo = geoCode.geoCodeRequest(argv.address);
+const latLngInfo = geoCode.geoCodeRequest(argv.address, (errorMessage, results) => {
+    if (errorMessage) {
+        console.log(errorMessage);
+    } else {
+        console.log(results.address);
+        weather.getWeather(results.lat, results.lng, (errorMessage, weatherresults) => {
+            if (errorMessage) {
+                console.log(errorMessage);
+            } else {
+                console.log(JSON.stringify(weatherresults), undefined, 2);
+            }
+        });
+    }
 
-weather.getWeather(latLngInfo.lat, latLngInfo.lng);
+});
+
+
 
 //419c26784103f62210acf9c0df7579f

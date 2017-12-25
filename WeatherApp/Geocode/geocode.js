@@ -7,17 +7,15 @@ var geoCodeRequest = (address) => {
         json: true
     }, (error, response, body) => {
         if (error) {
-            console.log('Something wrong with google servers. Mind if I take a couple of time to fix this.')
-            return;
+            callback('Something wrong with google servers. Mind if I take a couple of minutes to fix this.')
         } else if (body.status === 'ZERO_RESULTS') {
-            console.log('Unable to find the address');
+            callback('Unable to find the address');
         } else if (body.status === 'OK') {
-            const addressObject = {
+            callback(undefined, {
                 address: body.results[0].formatted_address,
                 lat: body.results[0].geometry.location.lat,
                 lng: body.results[0].geometry.location.lng
-            }
-            return addressObject;
+            });
         }
     });
 };
