@@ -3,7 +3,18 @@ const fs = require('fs');
 const yargs = require('yargs');
 
 const notes = require('./notes.js');
-const argv = yargs.argv;
+const argv = yargs.command('add', 'Add a new Note', {
+    title: {
+        demand: true,
+        alias: 't',
+        description: 'Title of Note'
+    },
+    body: {
+        demand: true,
+        alias: 'b',
+        description: 'Body Of Note'
+    }
+}).help().argv;
 var command = process.argv[2];
 
 if (command === 'add') {
