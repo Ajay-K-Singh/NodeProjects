@@ -12,7 +12,7 @@ const argv = yargs
     })
     .help().alias('help', 'h').argv;
 
-const latLngInfo = geoCode.geoCodeRequest(argv.address, (errorMessage, results) => {
+geoCode.geoCodeRequest(argv.address, (errorMessage, results) => {
     if (errorMessage) {
         console.log(errorMessage);
     } else {
@@ -21,7 +21,7 @@ const latLngInfo = geoCode.geoCodeRequest(argv.address, (errorMessage, results) 
             if (errorMessage) {
                 console.log(errorMessage);
             } else {
-                console.log(JSON.stringify(weatherresults), undefined, 2);
+                console.log(weatherresults.temperature);
             }
         });
     }

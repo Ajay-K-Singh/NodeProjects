@@ -7,7 +7,7 @@ var geoCodeRequest = (address) => {
         json: true
     }, (error, response, body) => {
         if (error) {
-            callback('Something wrong with google servers. Mind if I take a couple of minutes to fix this.')
+            callback('Something wrong with google servers.');
         } else if (body.status === 'ZERO_RESULTS') {
             callback('Unable to find the address');
         } else if (body.status === 'OK') {
